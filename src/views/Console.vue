@@ -19,8 +19,7 @@
           <div>4、参数传递</div>
           <div>5、函数节流</div>
         </div>
-        <div class="echarts" id="main" style="height: 300px; width: 100%"></div>
-        <div class="button" @click="handleclick()">提交</div>
+        <div class="button">提交</div>
       </div>
     </div>
   </div>
@@ -29,7 +28,6 @@
 <script setup name="console">
 import Header from '@/components/HeaderBar.vue'
 import { onMounted, ref } from 'vue'
-import * as echarts from 'echarts'
 
 const title = '平台'
 const name = 'arrow-left'
@@ -44,18 +42,6 @@ const newArrayFn = (arr) => {
   return arr.filter((item, idx) => {
     return arr.indexOf(item) === idx
   })
-}
-/**
- * includes 去重
- */
-const newArrFn = (arr) => {
-  const NewArray = []
-  for (let i = 0; i < arr.length; i++) {
-    if (!NewArray.includes(arr[i])) {
-      NewArray.push(arr[i])
-    }
-  }
-  return NewArray
 }
 /**
  * reduce 去重
@@ -78,92 +64,13 @@ const foo = () => {
 }
 const keith = foo()
 keith()
-// 节流 (规定时间内只触发一次)
-const throttle = (fn, delay) => {
-  let timer = null
-  delay = delay || 3000
-  return function (...args) {
-    if (timer) {
-      return
-    }
-    const _this = this
-    timer = setTimeout(() => {
-      timer = null
-    }, delay)
-    fn.apply(_this, args)
-  }
-}
-const val = ref(111)
-// 防抖 (多次触发只执行一次)
-const debounce = (fn, delay) => {
-  delay = delay || 200
-  let timer = null
-  return function (...args) {
-    const _this = this
-    if (timer) {
-      clearTimeout(timer)
-    }
-    timer = setTimeout(() => {
-      timer = null
-      fn.apply(_this, args)
-    })
-  }
-}
-const handleSubmit = () => {
-  console.log('节流', val.value++)
-}
-const handleclick = throttle((e) => {
-  handleSubmit()
-}, 5000)
 
-// const handleclick = throttle((e) => {
-//   console.log('节流', val.value++)
-// }, 3000)
-var myChart = null
-const init = () => {
-  var chartDom = document.getElementById('main')
-  myChart = echarts.init(chartDom)
-  var option
-
-  option = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line',
-      },
-    ],
-  }
-
-  option && myChart.setOption(option)
-}
 onMounted(() => {
-  init()
   newArrayReduceFn(arr)
   newArrayFn(arr)
-  newArrFn(arr)
   console.log('filter + indexOf', newArrayFn(arr))
 
-  console.log('new Set', Array.from(new Set(arr)))
-
-  console.log('includes', newArrFn(arr))
-
   console.log('reduce', newArrayReduceFn(arr))
-  // 判断当前是横竖屏
-  var widtha = window.screen.width
-  var heightb = window.screen.height
-
-  window.addEventListener('orientationchange', function () {
-    console.log('执行', window.orientation)
-    console.log(widtha, heightb)
-    myChart.resize()
-  })
 })
 </script>
 <style lang="scss" scoped>
