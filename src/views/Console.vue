@@ -21,18 +21,23 @@
         </div>
         <div class="button">提交</div>
       </div>
+      <Drag @handlepaly="handlepaly"></Drag>
     </div>
   </div>
 </template>
 
 <script setup name="console">
 import Header from '@/components/HeaderBar.vue'
+import Drag from '@/components/Drag.vue'
 import { onMounted, ref } from 'vue'
 
 const title = '平台'
 const name = 'arrow-left'
 const handBack = () => {
   console.log('返回')
+}
+const handlepaly = () => {
+  console.log('客服中心')
 }
 const arr = [1, 2, 3, 4, 5, 5, 4, 3, 2, 6]
 /**

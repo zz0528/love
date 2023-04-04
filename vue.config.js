@@ -42,19 +42,19 @@ module.exports = defineConfig({
     if (IS_PROD) {
       config.mode = 'production'
       config.plugins.push(
-        // new UglifyPlugin({
-        //   // 删除console
-        //   uglifyOptions: {
-        //     parallel: true, //开启多线程提高打包速度, 默认并发运行数：os.cpus().length - 1
-        //     warnings: false,
-        //     compress: {
-        //       drop_console: false,
-        //       drop_debugger: false,
-        //       pure_funcs: ['console.log', 'console.info'],
-        //     },
-        //     keep_fnames: true,
-        //   },
-        // }),
+        new UglifyPlugin({
+          // 删除console
+          uglifyOptions: {
+            parallel: true, //开启多线程提高打包速度, 默认并发运行数：os.cpus().length - 1
+            warnings: false,
+            compress: {
+              drop_console: false,
+              drop_debugger: false,
+              pure_funcs: ['console.log', 'console.info'],
+            },
+            keep_fnames: true,
+          },
+        }),
         // gzip压缩
         new CompressionPlugin({
           algorithm: 'gzip',
