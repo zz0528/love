@@ -3,7 +3,6 @@
     <Header :name="name" :title="title" @handBack="handBack"></Header>
     <div class="app_container">
       <div class="container">
-        <div class="title">vue</div>
         <div class="note">
           <div class="note-title">闭包的作用：</div>
           <div>1、延迟变量的生命周期</div>
@@ -19,7 +18,6 @@
           <div>4、参数传递</div>
           <div>5、函数节流</div>
         </div>
-        <div class="button">提交</div>
       </div>
       <Drag @handlepaly="handlepaly"></Drag>
     </div>
@@ -69,7 +67,14 @@ const foo = () => {
 }
 const keith = foo()
 keith()
+// console.log('shdjshjdh', keith())
+function Person() {}
 
+let p1 = new Person()
+let p2 = new Person()
+let obj = {}
+console.log(Person.prototype)
+console.log(p1._proto_)
 onMounted(() => {
   newArrayReduceFn(arr)
   newArrayFn(arr)
@@ -79,14 +84,6 @@ onMounted(() => {
 })
 </script>
 <style lang="scss" scoped>
-.title {
-  font-size: 20px;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  font-style: italic;
-  padding: 16px;
-}
 .note {
   padding: 12px;
   .note-title {
